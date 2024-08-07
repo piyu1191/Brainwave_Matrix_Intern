@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(230, 230, 230);
+        }
+
+        .container {
+            border: none;
+            border-radius: 15px;
+            background-color: rgb(156, 222, 252);
+            height: 40vw;
+            width: 50vw;
+            box-shadow: 4px 5px 6px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px;
+            font-size: 1.7em;
+            font-weight: 900;
+            border-bottom: 0.5px solid white;
+            margin-bottom: 20px;
+        }
+
+        .addTask {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        input {
+            padding: 7px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            border: 1px solid black;
+            box-shadow: 2px 2px 2px;
+        }
+
+        button {
+            background-color: white;
+            color: rgb(11, 11, 11);
+            padding: 4px;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 15px;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid white;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">To-Do List</div>
+        <div class="addTask">
+            <input type="text" placeholder="Add a new Task" id="inputTask">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul class="task-List" id="taskList">
+            <!-- Tasks will be added here -->
+        </ul>
+    </div>
+    <script>
+        function addTask() {
+            const inputTask = document.getElementById('inputTask');
+            const taskText = inputTask.value.trim();
+            if (taskText === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            // Create new task element
+            const newTask = document.createElement('li');
+            newTask.textContent = taskText;
+
+            // Create and append delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.onclick = function() {
+                newTask.remove();
+            };
+            newTask.appendChild(deleteBtn);
+
+            // Append new task to the list
+            const taskList = document.getElementById('taskList');
+            taskList.appendChild(newTask);
+
+            // Clear the input field
+            inputTask.value = '';
+        }
+    </script>
+</body>
+</html>
